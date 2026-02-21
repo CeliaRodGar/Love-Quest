@@ -86,27 +86,32 @@
     
   // Botón NO huye
   let noAttempts = 0;
-let escapeMode = false;
+  let escapeMode = false;
+  let yesScale = 1;
 
-function moveNoButton() {
- const maxX = window.innerWidth - noBtn.offsetWidth;
- const maxY = window.innerHeight - noBtn.offsetHeight;
-
-  // Limitar la posición aleatoria dentro de la pantalla
-  noBtn.style.left = Math.random() * maxX + "px";
-  noBtn.style.top = Math.random() * maxY + "px";
-  noBtn.style.position = "absolute";
-}
-
+  function moveNoButton() {
+    // Limitar posición dentro de la ventana
+    const maxX = window.innerWidth - noBtn.offsetWidth;
+    const maxY = window.innerHeight - noBtn.offsetHeight;
+  
+    // Añadimos un margen mínimo para que no quede tocando los bordes
+    const minMargin = 10;
+    noBtn.style.position = "absolute";
+    noBtn.style.left = Math.random() * (maxX - minMargin * 2) + minMargin + "px";
+    noBtn.style.top = Math.random() * (maxY - minMargin * 2) + minMargin + "px";
+  }
+  
+  // Clicks que cambian el texto y hacen crecer el botón Sí
   noBtn.addEventListener("click", () => {
     noAttempts++;
-
-    // Hacer crecer el botón Sí
-    yesScale += 0.3;
+  
+    // Crecer el botón Sí y ponerlo por encima del No
+    yesScale += 0.15;
     yesBtn.style.transform = `scale(${yesScale})`;
-
+    yesBtn.style.zIndex = 10;
+  
     if (noAttempts === 1) {
-      noBtn.textContent = "¿Seguro?";
+      noBtn.textContent = "¿Seguro? 🥺";
     } 
     else if (noAttempts === 2) {
       noBtn.textContent = "Piénsalo bien… 😏";
@@ -117,13 +122,13 @@ function moveNoButton() {
     else {
       noBtn.textContent = "No 😈";
       escapeMode = true;
-
-      // 👇 Mover inmediatamente al activarse
-      moveButton();
+  
+      // Huida inmediata aunque el cursor esté encima
+      moveNoButton();
     }
   });
-
-  // Si ya está en modo huida, también huye al intentar acercarse
+  
+  // Huida cuando el cursor pasa por encima, solo si escapeMode está activo
   noBtn.addEventListener("mouseover", () => {
     if (escapeMode) {
       moveNoButton();
@@ -156,4 +161,5 @@ function moveNoButton() {
 
 </body>
 </html>
+
 

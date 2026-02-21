@@ -88,13 +88,14 @@
   let noAttempts = 0;
 let escapeMode = false;
 
-function moveButton() {
-  const maxX = window.innerWidth - noBtn.offsetWidth;
-  const maxY = window.innerHeight - noBtn.offsetHeight;
+function moveNoButton() {
+ const maxX = window.innerWidth - noBtn.offsetWidth;
+ const maxY = window.innerHeight - noBtn.offsetHeight;
 
-  noBtn.style.position = "absolute";
+  // Limitar la posición aleatoria dentro de la pantalla
   noBtn.style.left = Math.random() * maxX + "px";
   noBtn.style.top = Math.random() * maxY + "px";
+  noBtn.style.position = "absolute";
 }
 
   noBtn.addEventListener("click", () => {
@@ -125,7 +126,7 @@ function moveButton() {
   // Si ya está en modo huida, también huye al intentar acercarse
   noBtn.addEventListener("mouseover", () => {
     if (escapeMode) {
-      moveButton();
+      moveNoButton();
     }
   });
 
@@ -155,3 +156,4 @@ function moveButton() {
 
 </body>
 </html>
+

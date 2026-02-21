@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Misión Romántica 💖</title>
+
+<style>
+  body {
+    background: linear-gradient(135deg, #0f0f0f, #2a003f);
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container {
+    position: relative;
+  }
+
+  button {
+    padding: 15px 25px;
+    margin: 10px;
+    font-size: 18px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #yes {
+    background-color: #ff4da6;
+    color: white;
+    position: relative;
+    z-index: 2;
+  }
+
+  #no {
+    background-color: #444;
+    color: white;
+    position: relative;
+    z-index: 1;
+  }
+
+  img {
+    width: 300px;
+    border-radius: 20px;
+    margin-top: 20px;
+    animation: fadeIn 1s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .heart {
+    position: absolute;
+    font-size: 24px;
+    animation: float 4s linear infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-800px); opacity: 0; }
+  }
+</style>
+
+</head>
+<body>
+
+<div class="container" id="main">
+  <h1>¿Cita el lunes para pizza y peli? 💖</h1>
+  <button id="yes">Sí 😍</button>
+  <button id="no">No 😈</button>
+</div>
+
+<script>
+  const yesBtn = document.getElementById("yes");
+    let yesScale = 1;
+  const noBtn = document.getElementById("no");
+  const container = document.getElementById("main");
+    
+  // Botón NO huye
+  let noAttempts = 0;
+let escapeMode = false;
+
+function moveButton() {
+  const maxX = window.innerWidth - noBtn.offsetWidth;
+  const maxY = window.innerHeight - noBtn.offsetHeight;
+
+  noBtn.style.position = "absolute";
+  noBtn.style.left = Math.random() * maxX + "px";
+  noBtn.style.top = Math.random() * maxY + "px";
+}
+
+  noBtn.addEventListener("click", () => {
+    noAttempts++;
+
+    // Hacer crecer el botón Sí
+    yesScale += 0.3;
+    yesBtn.style.transform = `scale(${yesScale})`;
+
+    if (noAttempts === 1) {
+      noBtn.textContent = "¿Seguro?";
+    } 
+    else if (noAttempts === 2) {
+      noBtn.textContent = "Piénsalo bien… 😏";
+    } 
+    else if (noAttempts === 3) {
+      noBtn.textContent = "Última oportunidad 👀";
+    } 
+    else {
+      noBtn.textContent = "No 😈";
+      escapeMode = true;
+
+      // 👇 Mover inmediatamente al activarse
+      moveButton();
+    }
+  });
+
+  // Si ya está en modo huida, también huye al intentar acercarse
+  noBtn.addEventListener("mouseover", () => {
+    if (escapeMode) {
+      moveButton();
+    }
+  });
+
+  // Botón SÍ muestra foto + corazones
+  yesBtn.addEventListener("click", () => {
+    container.innerHTML = `
+      <h1>🎉 ¡Cita desbloqueada! 🎉</h1>
+      <img src="20251212_011629.jpg" alt="Nuestra foto">
+      <p>Player 2 ha aceptado la misión 💖</p>
+    `;
+
+    // Crear corazones flotando
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = "100%";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
+    }, 300);
+  });
+</script>
+
+</body>
+</html>

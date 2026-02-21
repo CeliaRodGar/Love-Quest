@@ -106,12 +106,12 @@
     noAttempts++;
   
     // Crecer el botón Sí y ponerlo por encima del No
-    yesScale += 0.15;
+    yesScale += 0.3;
     yesBtn.style.transform = `scale(${yesScale})`;
     yesBtn.style.zIndex = 10;
   
     if (noAttempts === 1) {
-      noBtn.textContent = "¿Seguro? 🥺";
+      noBtn.textContent = "¿Seguro?";
     } 
     else if (noAttempts === 2) {
       noBtn.textContent = "Piénsalo bien… 😏";
@@ -141,7 +141,7 @@
       <h1>🎉 ¡Cita desbloqueada! 🎉</h1>
       <img src="20251212_011629.jpg" alt="Nuestra foto">
       <p>Player 2 ha aceptado la misión 💖</p>
-    `;
+    };
 
     // Crear corazones flotando
     setInterval(() => {
@@ -161,5 +161,6 @@
 
 </body>
 </html>
+
 
 

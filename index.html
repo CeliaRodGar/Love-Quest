@@ -32,22 +32,22 @@
   }
 
   #yes {
-    background-color: #ff4da6;
-    color: white;
-    position: relative;
-    z-index: 2;
-  }
+  background-color: #ff4da6;
+  color: white;
+  position: absolute;
+  left: 30%;   /* posición inicial */
+  top: 70%;
+  z-index: 2;
+}
 
-  #no {
-    background-color: #444;
-    color: white;
-    position: absolute;
-    z-index: 1;
-    left: 50%;
-    top: 60%;
-    transform: translate(-50%, -50%);
-  }
-
+#no {
+  background-color: #444;
+  color: white;
+  position: absolute;
+  left: 70%;   /* posición inicial */
+  top: 70%;
+  z-index: 1;
+}
   img {
     width: 300px;
     border-radius: 20px;
@@ -152,5 +152,6 @@
 
 </body>
 </html>
+
 
 
